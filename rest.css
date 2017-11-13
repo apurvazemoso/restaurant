@@ -1,16 +1,20 @@
 table {
     border-collapse: collapse;
+    background-color: #8d8d8d;
 }
 
 table, td, th {
     border: 1px solid black;
+    width:31%;
 }
 
 div.tablediv{
-	background-color: lightgreen;
-	border-style: groove;
-	width: 258%;
+	background-color: white;
+	border-color : darkslategray ;
+	border-style: solid;
+	width: 320%;
     padding: 4px;
+    border-radius:40px;
 }
 h1{
 	height : 150px;
@@ -61,5 +65,5 @@ h1{
 }
 
 div.modaldiv{
-	
+
 }

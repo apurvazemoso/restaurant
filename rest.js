@@ -37,10 +37,6 @@ var menuitems = [
     "price": 200
   },
 
-    {"dish": "Upma",
-    "price": 100
-  },
-
   {  "dish": "Uttapam",
     "price": 100
   },
@@ -120,7 +116,7 @@ function initial(){
 
     var seattable = document.getElementById("tablemenu");
     for (var i = 0; i <tableItems.length; i++){
-        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv'><b><h4> " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : " + tableItems[i].billAmount + "</h4>"
+        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>"
         seattable.innerHTML += tr;
     }
 }
@@ -174,7 +170,7 @@ function drop(ev) {
     ev.preventDefault();
     var data = event.dataTransfer.getData("Text");
     var table = ev.target.id;
-    if(table != ''){
+    if(table !== ''){
         tableItems[table.charAt(4)].billAmount += menuitems[data.charAt(4)].price;
         if(tableItems[table.charAt(4)].products.includes(menuitems[data.charAt(4)].dish)){
             var index = tableItems[table.charAt(4)].products.indexOf(menuitems[data.charAt(4)].dish);
@@ -193,7 +189,7 @@ function drop(ev) {
         var seattable = document.getElementById("tablemenu");
         seattable.innerHTML = '';   
         for (var i = 0; i <tableItems.length; i++){
-        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv'><b><h4> Table Number : " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : " + tableItems[i].billAmount + "</h4>";
+        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> Table Number : " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>";
         seattable.innerHTML += tr;
     }
     }
@@ -206,13 +202,13 @@ function openModal(i) {
     var modal = document.getElementById('myModal');
     var span = document.getElementsByClassName("close")[0];
     modal.style.display = "block";
-    var c = '';
+    var c = "<tr><td>Item</td><td>Quantity</td><td>Total Price</td></tr>";
     for(var it = 0; it<tableItems[i].products.length; it++){
         c += "<tr><td>" + tableItems[i].products[it] + "</td><td><input id='inpu|" + it+"|"+i + "' type='number' onchange='change(event)' value = " + tableItems[i].quantity[it] + "></input></td><td><span id='inpuu|" + it+"|"+i + "'>" +  tableItems[i].quantity[it] *search(tableItems[i].products[it]).price + "</span></td></tr>";
     }
 
     document.getElementById("modalcontent").innerHTML = 
-        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table>" + c + "</table><h4> Total Amount : " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
+        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table style='width:100%'>" + c + "</table><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
 }
 
 function search(nameKey){
@@ -228,18 +224,9 @@ function change(ev){
 var myarray = r.split('|');
 var i = myarray[2];
 var it = myarray[1];
-/*var tableItems= [
-  {
-    "tableNumber":"Table-1",
-    "billAmount" : 0,
-    "items": 0,
-    "products" : [],
-    "quantity" : []
-  },*/
-
 var item = search(tableItems[i].products[it]);
 tableItems[i].quantity[it] = document.getElementById(ev.target.id).value;
-var c = '';
+var c = "<tr><td>Item</td><td>Quantity</td><td>Total Price</td></tr>";
 tableItems[i].billAmount = 0;
 tableItems[i].items = 0;
     for(var itm = 0; itm<tableItems[i].products.length; itm++){
@@ -248,7 +235,7 @@ tableItems[i].items = 0;
         c += "<tr><td>" + tableItems[i].products[itm] + "</td><td><input id='inpu|" + itm+"|"+i + "' type='number' onchange='change(event)' value = " + tableItems[i].quantity[itm] + "></input></td><td><span id='inpuu|" + itm+"|"+i + "'>" +  tableItems[i].quantity[itm] * search(tableItems[i].products[itm]).price + "</span></td></tr>";
     }
      document.getElementById("modalcontent").innerHTML = 
-        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table>" + c + "</table><h4> Total Amount : " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
+        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table style='width:100%>" + c + "</table><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
 
 /*<button id='final' onclick='fin(" + i + "')>Generate Bill/Close Session</button>";
 */
@@ -261,4 +248,11 @@ function fin(i){
     tableItems[i].billAmount = 0;
     tableItems[i].products = [];
     tableItems[i].quantity = [];
+    
+    var seattable = document.getElementById("tablemenu");
+    document.getElementById("tablemenu").innerHTML = ""; 
+    for (var i = 0; i <tableItems.length; i++){
+        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>"
+        seattable.innerHTML += tr;
+    }
 }
