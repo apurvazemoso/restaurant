@@ -212,7 +212,7 @@ function openModal(i) {
     }
 
     document.getElementById("modalcontent").innerHTML = 
-        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table>" + c + "</table><h4> Total Amount : " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + "')>Generate Bill/Close Session</button>";
+        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table>" + c + "</table><h4> Total Amount : " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
 }
 
 function search(nameKey){
@@ -237,8 +237,6 @@ var it = myarray[1];
     "quantity" : []
   },*/
 
-
-
 var item = search(tableItems[i].products[it]);
 tableItems[i].quantity[it] = document.getElementById(ev.target.id).value;
 var c = '';
@@ -250,18 +248,15 @@ tableItems[i].items = 0;
         c += "<tr><td>" + tableItems[i].products[itm] + "</td><td><input id='inpu|" + itm+"|"+i + "' type='number' onchange='change(event)' value = " + tableItems[i].quantity[itm] + "></input></td><td><span id='inpuu|" + itm+"|"+i + "'>" +  tableItems[i].quantity[itm] * search(tableItems[i].products[itm]).price + "</span></td></tr>";
     }
      document.getElementById("modalcontent").innerHTML = 
-        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table>" + c + "</table><h4> Total Amount : " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")>Generate Bill/Close Session</button>";
+        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table>" + c + "</table><h4> Total Amount : " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
 
 /*<button id='final' onclick='fin(" + i + "')>Generate Bill/Close Session</button>";
 */
-
-
-
 }
 
 function fin(i){
-    modal.style.display = "none";
-    alert("<h2> Bill Generated</h2><h3> Final pay rupees " + tableItems[i].billAmount + "</h3>");
+    
+    document.getElementById("modalcontent").innerHTML = "<h2> Bill Generated</h2><h3> Final pay rupees " + tableItems[i].billAmount + "</h3>";
     tableItems[i].items = 0;
     tableItems[i].billAmount = 0;
     tableItems[i].products = [];
