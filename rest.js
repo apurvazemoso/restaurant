@@ -60,7 +60,8 @@ var menuitems = [
     "price": 240
   },
 
-    {"dish": "Non Veg Thali",
+  {
+    "dish": "Non Veg Thali",
     "price": 280
   },
 
@@ -74,36 +75,6 @@ var menuitems = [
 
   {  "dish": "Veg Biryani",
     "price": 200
-  },
-
-    {"dish": "Burger",
-    "price": 200
-  },
-
-  {  "dish":"Salad",
-    "price": 120
-  },
-  {  "dish": "Pizza",
-    "price": 340
-  },
-
-    {"dish": "Chocolate Shake",
-    "price": 80
-  },
-
-  {  "dish": "Momos",
-    "price": 100
-  },
-
-    {"dish": "Noodles",
-    "price": 250
-  },
-
-  {  "dish":"Special Surprise Dish of the day",
-    "price": 250
-  },
-  {  "dish": "Dessert",
-    "price": 100
   }
 ];
 
@@ -235,7 +206,7 @@ tableItems[i].items = 0;
         c += "<tr><td>" + tableItems[i].products[itm] + "</td><td><input id='inpu|" + itm+"|"+i + "' type='number' onchange='change(event)' value = " + tableItems[i].quantity[itm] + "></input></td><td><span id='inpuu|" + itm+"|"+i + "'>" +  tableItems[i].quantity[itm] * search(tableItems[i].products[itm]).price + "</span></td></tr>";
     }
      document.getElementById("modalcontent").innerHTML = 
-        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table style='width:100%>" + c + "</table><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
+        "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table style='width:100%'>" + c + "</table><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
 
 /*<button id='final' onclick='fin(" + i + "')>Generate Bill/Close Session</button>";
 */
