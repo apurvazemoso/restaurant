@@ -87,7 +87,7 @@ function initial(){
 
     var seattable = document.getElementById("tablemenu");
     for (var i = 0; i <tableItems.length; i++){
-        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>"
+        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b></b><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>"
         seattable.innerHTML += tr;
     }
 }
@@ -160,7 +160,7 @@ function drop(ev) {
         var seattable = document.getElementById("tablemenu");
         seattable.innerHTML = '';   
         for (var i = 0; i <tableItems.length; i++){
-        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> Table Number : " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>";
+        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> Table Number : " + tableItems[i].tableNumber + "</h4></b><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>";
         seattable.innerHTML += tr;
     }
     }
@@ -205,6 +205,14 @@ tableItems[i].items = 0;
         tableItems[i].billAmount += tableItems[i].quantity[itm] * search(tableItems[i].products[itm]).price;
         c += "<tr><td>" + tableItems[i].products[itm] + "</td><td><input id='inpu|" + itm+"|"+i + "' type='number' onchange='change(event)' value = " + tableItems[i].quantity[itm] + "></input></td><td><span id='inpuu|" + itm+"|"+i + "'>" +  tableItems[i].quantity[itm] * search(tableItems[i].products[itm]).price + "</span></td></tr>";
     }
+
+    var seattable = document.getElementById("tablemenu");
+    document.getElementById("tablemenu").innerHTML = ""; 
+    for (var i1 = 0; i1 <tableItems.length; i1++){
+        console.log(tableItems[i1].items);
+        var tr = "<div onclick = 'openModal(" + i1 + ")' id='seat" + i1 + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> " + tableItems[i1].tableNumber + "</h4></b><h4> Total Amount : Rs. " + tableItems[i1].billAmount + "</h4>"
+        seattable.innerHTML += tr;
+    }
      document.getElementById("modalcontent").innerHTML = 
         "<div class='modaldiv'><b><h2 align='center'>Bill of Table Number : " + tableItems[i].tableNumber + "</h2></b><table style='width:100%'>" + c + "</table><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4><button id='final' onclick='fin(" + i + ")'>Generate Bill/Close Session</button>";
 
@@ -223,7 +231,7 @@ function fin(i){
     var seattable = document.getElementById("tablemenu");
     document.getElementById("tablemenu").innerHTML = ""; 
     for (var i = 0; i <tableItems.length; i++){
-        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> " + tableItems[i].tableNumber + "</h4></b><h4> Items : " + tableItems[i].items + "</h4><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>"
+        var tr = "<div onclick = 'openModal(" + i + ")' id='seat" + i + "'ondrop='drop(event)' ondragover='allow(event)' class='tablediv tablemodal'><b><h4> " + tableItems[i].tableNumber + "</h4></b><h4> Total Amount : Rs. " + tableItems[i].billAmount + "</h4>"
         seattable.innerHTML += tr;
     }
 }
